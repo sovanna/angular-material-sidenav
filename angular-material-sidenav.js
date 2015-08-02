@@ -254,13 +254,26 @@
         }
     ])
 
+    .directive('ssSidenav', [
+        function () {
+            return {
+                restrict: 'E',
+                scope: {
+                    menu: '='
+                },
+                templateUrl: 'views/ss/menu-sidenav.tmpl.html'
+            };
+        }
+    ])
+
     .run(['$templateCache', function($templateCache) {
         $templateCache.put('views/ss/menu-link.tmpl.html',
             '<md-button\n' +
             '   ng-class="{\'active\' : isSelected(section)}"\n' +
+            '   class="md-raised md-primary"' +
             '   ui-sref="{{section.state}}"\n' +
             '   ng-click="focusSection(section)">\n' +
-            '   {{section | humanizeDoc}}\n' +
+            '   {{section.name}}\n' +
             '   <span class="md-visually-hidden"\n' +
             '       ng-if="isSelected(section)">\n' +
             '       current page\n' +
@@ -269,9 +282,9 @@
         );
 
         $templateCache.put('views/ss/menu-toggle.tmpl.html',
-            '<md-button class="md-button-toggle"\n' +
+            '<md-button class="md-raised md-primary md-button-toggle"\n' +
             '   ng-click="toggle(section)"\n' +
-            '   aria-controls="docs-menu-{{section.name | nospace}}"\n' +
+            '   aria-controls="docs-menu-{{section.name}}"\n' +
             '   aria-expanded="{{isOpen(section)}}">\n' +
             '   <div flex layout="row">\n' +
             '       {{section.name}}\n' +
@@ -286,11 +299,27 @@
             '   </span>\n' +
             '</md-button>\n' +
             '\n' +
-            '<ul id="docs-menu-{{section.name | nospace}}" class="menu-toggle-list">\n' +
+            '<ul id="docs-menu-{{section.name}}" class="menu-toggle-list">\n' +
             '   <li ng-repeat="page in section.pages">\n' +
             '       <menu-link section="page"></menu-link>\n' +
             '   </li>\n' +
             '</ul>\n'
+        );
+
+        $templateCache.put('views/ss/menu-sidenav.tmpl.html',
+            '<ul class="menu">' +
+            '    <li ng-repeat="section in menu.sections">' +
+            '        <h2 class="menu-heading md-subhead" ng-if="section.type === \'heading\'">{{section.name}}</h2>' +
+            '        <menu-link section="section" ng-if="section.type === \'link\'"></menu-link>' +
+            '        <menu-toggle section="section" ng-if="section.type === \'toggle\'"></menu-toggle>' +
+            '        <ul ng-if="section.children">' +
+            '            <li ng-repeat="child in section.children">' +
+            '                <menu-link section="child" ng-if="child.type === \'link\'"></menu-link>' +
+            '                <menu-toggle section="child" ng-if="child.type === \'toggle\'"></menu-toggle>' +
+            '            </li>' +
+            '        </ul>' +
+            '    </li>' +
+            '</ul>'
         );
     }]);
 })(window, window.angular);
