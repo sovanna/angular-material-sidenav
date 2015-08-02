@@ -8,7 +8,7 @@
   "description": "Component that build the same sidenav from official angular material website",
   "main": [
     "./angular-material-sidenav.js",
-    "./angular-material-sidenav.css",
+    "./angular-material-sidenav.css"
   ],
   "keywords": [
     "angular",
