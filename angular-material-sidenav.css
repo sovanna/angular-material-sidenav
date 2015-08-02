@@ -1,0 +1,162 @@
+.menu {
+    margin: 0;
+}
+
+.menu,
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin: 0;
+}
+
+.menu > li:nth-child(1) {
+    border-top: none;
+}
+
+.md-whiteframe-glow-z1 {
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+}
+
+.menu > li {
+    border-bottom: 1px solid #ec497a;
+}
+
+.menu .md-button {
+    border-radius: 0;
+    color: white;
+    cursor: pointer;
+    display: block;
+    align-items: inherit;
+    line-height: 40px;
+    margin: 0;
+    max-height: 40px;
+    overflow: hidden;
+    padding: 0px 16px;
+    text-align: left;
+    text-decoration: none;
+    white-space: normal;
+    width: 100%;
+}
+
+.menu .md-button:hover,
+.menu .md-button:focus {
+    background: #ec497a !important;
+}
+
+.menu .md-button md-icon {
+    color: white;
+}
+
+.menu md-select {
+    /**
+     * Override md-select margins.
+     * With margins the menu will look incorrect and causes mobile list
+     * to not be scrollable.
+     */
+    margin: 0;
+    width: 100%;
+}
+
+.menu md-select md-select-label {
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.menu md-select md-select-label span {
+    margin-right: auto;
+    padding-left: 13px;
+}
+
+.menu md-select .md-select-icon {
+    margin-right: 28px;
+}
+
+.menu button.md-button::-moz-focus-inner {
+    padding: 0;
+}
+
+.menu .md-button.active {
+    background: #ec497a;
+}
+
+.menu-heading {
+    display: block;
+    line-height: 32px;
+    margin: 0;
+    padding: 8px 16px 0;
+    text-align: left;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.54)
+}
+
+.menu-toggle-list {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.menu .menu-toggle-list a.md-button {
+    display: block;
+    padding: 0 16px 0 32px;
+    text-transform: none;
+    text-rendering: optimizeLegibility;
+    font-weight: 500;
+}
+
+ul#docs-menu-Directives {
+    margin-bottom: 20px;
+}
+
+.md-button-toggle .md-toggle-icon {
+    display: block;
+    margin-left: auto;
+    speak: none;
+    vertical-align: middle;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+}
+
+.md-button-toggle .md-toggle-icon.toggled {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+}
+
+.menu-toggle-list > li {
+    cursor: grab;
+}
+
+.menu-toggle-list .md-content-card .md-card-screen {
+    -webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
+}
+
+.menu-toggle-list .md-content-card:hover .md-card-screen {
+    opacity: .6;
+}
+
+.menu-toggle-list .md-content-card .md-card-footer {
+    position: absolute;
+    text-transform: uppercase;
+    padding: 10px;
+    background: black;
+    color: #fff;
+    z-index: 20;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    font-size: 13px;
+    opacity: 0;
+    top: 15px;
+}
+.menu-toggle-list .md-content-card:hover .md-card-footer {
+    opacity: 1;
+    margin-left: 16px;
+}

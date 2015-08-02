@@ -1,0 +1,21 @@
+{
+  "name": "angular-material-sidenav",
+  "version": "0.0.1",
+  "homepage": "https://github.com/sovanna/angular-material-sidenav",
+  "authors": [
+    "Sovanna Hing <sovanna.hing@gmail.com>"
+  ],
+  "description": "Component that build the same sidenav from official angular material website",
+  "main": [
+    "./angular-material-sidenav.js",
+    "./angular-material-sidenav.css",
+  ],
+  "keywords": [
+    "angular",
+    "material",
+    "angular-material",
+    "sidenav",
+    "angular-material-sidenav"
+  ],
+  "license": "MIT"
+}
