@@ -1,0 +1,18 @@
+<md-sidenav class="pink md-sidenav-left md-whiteframe-z2"
+    md-component-id="left"
+    md-is-locked-open="$mdMedia('gt-md')">
+
+    <header class="nav-header">
+        <a ng-href="generator" class="logo">
+
+        </a>
+    </header>
+
+    <md-content flex role="navigation" style="background: {{primaryColor}}">
+        <ss-sidenav menu="menu"></ss-sidenav>
+    </md-content>
+</md-sidenav>
+
+<div layout="column" flex role="main">
+    <div ui-view layout="column"></div>
+</div>
