@@ -14,15 +14,24 @@
     angular.module('sasrio.angular-material-sidenav', [])
 
     .provider('ssSideNavSections', function SSSideNavSectionsProvider() {
-        var _sections = [];
+        var _sections = [],
+            _theme,
+            _palettes;
 
         this.initWithSections = function(value) {
             _sections = value ? value : [];
         };
 
+        this.initWithTheme = function (value) {
+            _theme = value.theme();
+            _palettes = value._PALETTES;
+        };
+
         this.$get = [function ssSideNavSectionsFactory()  {
             var SSSideNavSections = function() {
                 this.sections = _sections;
+                this.theme = _theme;
+                this.palettes = _palettes;
             };
 
             return new SSSideNavSections();
@@ -63,36 +72,23 @@
                 sections = ssSideNavSections.sections;
 
             var matchPage = function(section, page, newState) {
-                var toParams = newState ? newState.toParams : null,
-                    toState = newState ? newState.toState : null,
-                    state_check;
+                var toState = newState ? newState.toState : null;
 
                 if (!toState) {
                     return console.warn('ss-sidenav: `toState` key not found');
                 }
 
-                if (!toParams) {
-                    return console.warn('ss-sidenav: `toParams` key not found');
-                }
-
-                state_check = toState.name;
-
-                if (Object.keys(toParams).length) {
-                    state_check += '(' + JSON.stringify(toParams) + ')';
-                } else {
-                    state_check += '()';
-                }
-
-                if (state_check !== page.state) {
+                if (toState.name !== page.state) {
                     return;
                 }
 
                 if (!self) {
+                    console.warn('ss-sidenav: strange `self` is undef');
                     return;
                 }
 
                 self.selectSection(section);
-                self.selectPage(section, page);
+                self.selectPage(section, page.state);
             };
 
             var onStateChangeStart = function(event, toState, toParams) {
@@ -258,6 +254,7 @@
         function () {
             return {
                 restrict: 'E',
+                replace: true,
                 scope: {
                     menu: '='
                 },
@@ -266,16 +263,72 @@
         }
     ])
 
+    .directive('ssStyleColor', [
+        'ssSideNavSections',
+        function (ssSideNavSections) {
+            return {
+                restrict: 'A',
+                scope: {
+                    ssStyleColor: '='
+                },
+                link: function ($scope, $el) {
+                    var _apply_color = function () {
+                        for (var p in $scope.ssStyleColor) {
+                            if ($scope.ssStyleColor.hasOwnProperty(p)) {
+                                var themeColors = ssSideNavSections.theme.colors,
+                                    split = ($scope.ssStyleColor[p] || '').split('.'),
+                                    hueR,
+                                    colorR,
+                                    colorA,
+                                    hueA,
+                                    colorValue;
+
+                                if (split.length < 2) {
+                                    split.unshift('primary');
+                                }
+
+                                hueR = split[1] || 'hue-1'; // 'hue-1'
+                                colorR = split[0] || 'primary'; // 'warn'
+
+                                // Absolute color: 'orange'
+                                colorA = themeColors[colorR] ? themeColors[colorR].name : colorR;
+
+                                // Absolute Hue: '500'
+                                hueA = themeColors[colorR] ? (themeColors[colorR].hues[hueR] || hueR) : hueR;
+
+                                colorValue = ssSideNavSections.palettes[colorA][hueA] ? ssSideNavSections.palettes[colorA][hueA].value : ssSideNavSections.palettes[colorA]['500'].value;
+
+                                $el.css(p, 'rgb(' + colorValue.join(',') + ')');
+                            }
+                        }
+                    };
+
+                    if (!ssSideNavSections.theme || !ssSideNavSections.palettes) {
+                        return console.warn('ss-sidenav: you probably want to ssSideNavSectionsProvider.initWithTheme($mdThemingProvider)');
+                    }
+
+                    $scope.$watch('ssStyleColor', function (oldVal, newVal) {
+                        if ((oldVal && newVal) && oldVal !== newVal) {
+                            _apply_color();
+                        }
+                    });
+
+                    _apply_color();
+                }
+            };
+        }
+    ])
+
     .run(['$templateCache', function($templateCache) {
         $templateCache.put('views/ss/menu-link.tmpl.html',
             '<md-button\n' +
-            '   ng-class="{\'active\' : isSelected(section)}"\n' +
+            '   ss-style-color="{\'background-color\': isSelected(section.state) ? \'primary.800\': \'primary.default\'}"' +
             '   class="md-raised md-primary"' +
             '   ui-sref="{{section.state}}"\n' +
             '   ng-click="focusSection(section)">\n' +
             '   {{section.name}}\n' +
             '   <span class="md-visually-hidden"\n' +
-            '       ng-if="isSelected(section)">\n' +
+            '       ng-if="isSelected(section.state)">\n' +
             '       current page\n' +
             '   </span>\n' +
             '</md-button>\n'
@@ -308,8 +361,8 @@
 
         $templateCache.put('views/ss/menu-sidenav.tmpl.html',
             '<ul class="menu">' +
-            '    <li ng-repeat="section in menu.sections">' +
-            '        <h2 class="menu-heading md-subhead" ng-if="section.type === \'heading\'">{{section.name}}</h2>' +
+            '    <li ss-style-color="{\'border-bottom-color\': \'primary.600\'}" ng-repeat="section in menu.sections">' +
+            '        <h2 ss-style-color="{\'color\': \'primary.A100\'}" class="menu-heading md-subhead" ng-if="section.type === \'heading\'">{{section.name}}</h2>' +
             '        <menu-link section="section" ng-if="section.type === \'link\'"></menu-link>' +
             '        <menu-toggle section="section" ng-if="section.type === \'toggle\'"></menu-toggle>' +
             '        <ul ng-if="section.children">' +

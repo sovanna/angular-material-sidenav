@@ -12,6 +12,10 @@
     margin: 0;
 }
 
+.menu > li {
+    border-bottom: 1px solid;
+}
+
 .menu > li:nth-child(1) {
     border-top: none;
 }
