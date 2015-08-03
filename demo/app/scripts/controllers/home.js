@@ -8,6 +8,6 @@
  * Controller of the demoApp
  */
 angular.module('demoApp')
-    .controller('IndexCtrl', function () {
+    .controller('HomeCtrl', function () {
 
     });

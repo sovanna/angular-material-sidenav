@@ -56,7 +56,7 @@ angular
                 name: 'common.home',
                 url: '/',
                 templateUrl: 'views/home.html',
-                controller: 'IndexCtrl'
+                controller: 'HomeCtrl'
             });
 
             $stateProvider.state({
