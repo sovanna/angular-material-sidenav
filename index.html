@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Angular-material-sidenav by sovanna</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Angular-material-sidenav</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/sovanna/angular-material-sidenav">View the Project on GitHub <small>sovanna/angular-material-sidenav</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/sovanna/angular-material-sidenav/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/sovanna/angular-material-sidenav/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/sovanna/angular-material-sidenav">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="angular-material-sidenav" class="anchor" href="#angular-material-sidenav" aria-hidden="true"><span class="octicon octicon-link"></span></a>angular-material-sidenav</h1>
+
+<p>A simple component that takes all pieces of angular doc source code to build in a single file the <strong>sidenav menu</strong> they used in their own website.</p>
+
+<h5>
+<a id="1-install" class="anchor" href="#1-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. install</h5>
+
+<pre><code>bower install angular-material-sidenav --save
+</code></pre>
+
+<h5>
+<a id="2-configuration" class="anchor" href="#2-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. configuration</h5>
+
+<p>add <code>sasrio.angular-material-sidenav</code> as a dep on your app</p>
+
+<pre><code>angular.module('myApp', ['sasrio.angular-material-sidenav']).config..etc
+</code></pre>
+
+<p>use the <code>ssSideNavSectionsProvider</code> to config your menu</p>
+
+<pre><code>ssSideNavSectionsProvider.initWithSections([{
+    name: 'Section Heading 1',
+    type: 'heading',
+    children: [{
+        name: 'Toogle 1',
+        type: 'toggle',
+        pages: [{
+            name: 'item 1',
+            state: 'common.index'
+        }, {
+            name: 'item 2',
+            state: 'common.index'
+        }]
+    }]
+}, {
+    name: 'Simple link to Index state',
+    state: 'common.index,
+    type: 'link'
+}]);
+</code></pre>
+
+<h5>
+<a id="3-use" class="anchor" href="#3-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. use</h5>
+
+<p>in your main controller, simply use the factory <code>ssSideNav</code> (add the dep in your controller as usual), then :</p>
+
+<pre><code>$scope.menu = ssSideNav;
+</code></pre>
+
+<p>and of course, in your html view,</p>
+
+<pre><code>&lt;ss-sidenav menu="menu"&gt;&lt;/ss-sidenav&gt;
+</code></pre>
+
+<h5>
+<a id="4-customization" class="anchor" href="#4-customization" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. customization</h5>
+
+<p>the default color used is the blue as a primaryPalette.</p>
+
+<p>I suggest you to also override the css to really do what you want.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/sovanna">sovanna</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
