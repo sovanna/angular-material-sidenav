@@ -37,7 +37,9 @@ angular
 
             $mdThemingProvider
                 .theme('default')
-                .primaryPalette('blue');
+                .primaryPalette('blue', {
+                    'default': '700'
+                });
 
             $urlRouterProvider.otherwise(function () {
                 return '/';
@@ -51,12 +53,57 @@ angular
             });
 
             $stateProvider.state({
-                name: 'common.index',
+                name: 'common.home',
                 url: '/',
-                templateUrl: 'views/index.html',
+                templateUrl: 'views/home.html',
                 controller: 'IndexCtrl'
             });
 
+            $stateProvider.state({
+                name: 'common.toggle1',
+                url: '/toogle1',
+                abstract: true,
+                template: '<ui-view/>'
+            });
+
+            $stateProvider.state({
+                name: 'common.toggle1.item1',
+                url: '/item1',
+                template: 'hello toggle1 item1'
+            });
+
+            $stateProvider.state({
+                name: 'common.toggle1.item2',
+                url: '/item2',
+                template: 'hello toggle1 item2'
+            });
+
+            $stateProvider.state({
+                name: 'common.link1',
+                url: '/link1',
+                template: 'hello link1'
+            });
+
+            $stateProvider.state({
+                name: 'common.link2',
+                url: '/link2',
+                template: 'hello link2'
+            });
+
+            $stateProvider.state({
+                name: 'common.toggle2',
+                url: '/toogle2',
+                abstract: true,
+                template: '<ui-view/>'
+            });
+
+            $stateProvider.state({
+                name: 'common.toggle2.item1',
+                url: '/item1',
+                template: 'hello toggle2 item1'
+            });
+
+            ssSideNavSectionsProvider.initWithTheme($mdThemingProvider);
             ssSideNavSectionsProvider.initWithSections([{
                 name: 'Section Heading 1',
                 type: 'heading',
@@ -65,53 +112,30 @@ angular
                     type: 'toggle',
                     pages: [{
                         name: 'item 1',
-                        state: 'common.index'
+                        state: 'common.toggle1.item1'
                     }, {
                         name: 'item 2',
-                        state: 'common.index'
+                        state: 'common.toggle1.item2'
                     }]
                 }]
             }, {
-                name: 'Link to index 1 ',
-                state: 'common.index',
+                name: 'Link 1 ',
+                state: 'common.link1',
                 type: 'link'
             }, {
-                name: 'Link to index 2',
-                state: 'common.index',
-                type: 'link'
-            }, {
-                name: 'Toogle 2',
-                type: 'toggle',
-                pages: [{
-                    name: 'item 1',
-                    state: 'common.index'
-                }, {
-                    name: 'item 2',
-                    state: 'common.index'
-                }, {
-                    name: 'item 3',
-                    state: 'common.index'
-                }]
-            }, {
-                name: 'Link to index 1',
-                state: 'common.index',
+                name: 'Link 2',
+                state: 'common.link2',
                 type: 'link'
             }, {
                 name: 'Section Heading 2',
                 type: 'heading',
                 children: [{
-                    name: 'Toogle 1',
+                    name: 'Toogle 2',
                     type: 'toggle',
                     pages: [{
                         name: 'item 1',
-                        state: 'common.index'
-                    }, {
-                        name: 'item 2',
-                        state: 'common.index'
-                    }, {
-                        name: 'item 3',
-                        state: 'common.index'
-                    },]
+                        state: 'common.toggle2.item1'
+                    }]
                 }]
             }]);
         }
