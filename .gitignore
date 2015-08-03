@@ -1,3 +1,4 @@
 demo/.tmp
 demo/bower_components
 demo/node_modules
+sftp-config.json
