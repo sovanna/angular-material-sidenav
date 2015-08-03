@@ -35,5 +35,9 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "grunt-angular-templates": "^0.5.7",
+    "grunt-cdnify": "^0.1.1"
   }
 }
