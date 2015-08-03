@@ -1,19 +1,19 @@
 # angular-material-sidenav
 
-A simple component that takes all pieces of angular doc source code to build in a single file the **sidenav menu** they used in their own website.
+Simple component that reproduce the Angular Material Style SideNav Menu from their own website [material.angularjs.org](https://material.angularjs.org/).
+Available [Demo](http://sovanna.github.io/angular-material-sidenav/demo/dist)
 
-
-##### 1. install
+##### 1. Installation
 
 	bower install angular-material-sidenav --save
 	
-##### 2. configuration
+##### 2. Configuration
 
-add `sasrio.angular-material-sidenav` as a dep on your app
+add `sasrio.angular-material-sidenav`  to your main module's list of dependencies
 	
-	angular.module('myApp', ['sasrio.angular-material-sidenav']).config..etc
+	angular.module('myApp', ['sasrio.angular-material-sidenav'])
 	
-use the `ssSideNavSectionsProvider` to config your menu
+use the `ssSideNavSectionsProvider` as a **provider** to config your menu items
 
 	ssSideNavSectionsProvider.initWithSections([{
 		name: 'Section Heading 1',
@@ -23,10 +23,10 @@ use the `ssSideNavSectionsProvider` to config your menu
 			type: 'toggle',
 			pages: [{
 				name: 'item 1',
-				state: 'common.index'
+				state: 'common.toggle.item1'
 			}, {
 				name: 'item 2',
-				state: 'common.index'
+				state: 'common.toggle.item2'
 			}]
 		}]
 	}, {
@@ -35,18 +35,32 @@ use the `ssSideNavSectionsProvider` to config your menu
 		type: 'link'
 	}]);
 	
-##### 3. use
+Also, provide to module the `$mdThemingProvider` in order to get same colors
 
-in your main controller, simply use the factory `ssSideNav` (add the dep in your controller as usual), then :
-
-	$scope.menu = ssSideNav;
+	ssSideNavSectionsProvider.initWithTheme($mdThemingProvider);
 	
-and of course, in your html view,
+You can check the [demo source code of app.js](https://github.com/sovanna/angular-material-sidenav/blob/master/demo/app/scripts/app.js) to see more on how you can add items
+	
+##### 3. Usage
+
+In order to display your sidenav menu, use the factory `ssSideNav` to get **all sections** and send them into the directive , example :
+
+	// in your controller, add the factory ssSideNav
+	angular.module('app.controller', [
+	  'ssSideNav',
+	  function (ssSideNav) {
+	    $scope.menu = ssSideNav;
+	  }
+	]);
+
+and of course, in your html view:
 
 	<ss-sidenav menu="menu"></ss-sidenav>
 
-##### 4. customization
+##### 4. Customization
 
-the default color used is the blue as a primaryPalette.
+Colors are handle using a **directive** from the gist [dh94 mdStyleColor](https://gist.github.com/dh94/517187e03fdde3c18103)
 
-I suggest you to also override the css to really do what you want.
+All sidenav is builded using the **primary** color configured with `$mdThemingProvider.
+
+If you look the source code, you can easily add new template item, new kind of items and so on...
