@@ -1,55 +1,53 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Angular-material-sidenav by sovanna</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="wrapper">
-      <header>
-        <h1>Angular-material-sidenav</h1>
-        <p></p>
+        <header>
+            <h1>Angular-material-sidenav</h1>
+            <p></p>
+            <p class="view"><a href="https://github.com/sovanna/angular-material-sidenav">View the Project on GitHub <small>sovanna/angular-material-sidenav</small></a></p>
+            <ul>
+                <li><a href="https://github.com/sovanna/angular-material-sidenav/zipball/master">Download <strong>ZIP File</strong></a></li>
+                <li><a href="https://github.com/sovanna/angular-material-sidenav/tarball/master">Download <strong>TAR Ball</strong></a></li>
+                <li><a href="https://github.com/sovanna/angular-material-sidenav">View On <strong>GitHub</strong></a></li>
+            </ul>
+        </header>
+        <section>
+            <h1>
+              <a id="angular-material-sidenav" class="anchor" href="#angular-material-sidenav" aria-hidden="true"><span class="octicon octicon-link"></span></a>angular-material-sidenav
+            </h1>
 
-        <p class="view"><a href="https://github.com/sovanna/angular-material-sidenav">View the Project on GitHub <small>sovanna/angular-material-sidenav</small></a></p>
+            <p>Simple component that reproduce the <strong>Angular Material Style SideNav Menu</strong> from their own website <a href="https://material.angularjs.org">material.angularjs.org</a>.<br>Available <a href="/demo/dist" target="_blank">Demo</a></p>
 
+            <h2>
+              <a id="1-install" class="anchor" href="#1-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Installation
+            </h2>
 
-        <ul>
-          <li><a href="https://github.com/sovanna/angular-material-sidenav/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/sovanna/angular-material-sidenav/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/sovanna/angular-material-sidenav">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
-<a id="angular-material-sidenav" class="anchor" href="#angular-material-sidenav" aria-hidden="true"><span class="octicon octicon-link"></span></a>angular-material-sidenav</h1>
+            <pre><code>bower install angular-material-sidenav --save</code></pre>
 
-<p>A simple component that takes all pieces of angular doc source code to build in a single file the <strong>sidenav menu</strong> they used in their own website.</p>
+            <h2>
+              <a id="2-configuration" class="anchor" href="#2-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Configuration
+            </h2>
 
-<h5>
-<a id="1-install" class="anchor" href="#1-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. install</h5>
+            <p>Add <code>sasrio.angular-material-sidenav</code> to your main module's list of dependencies</p>
 
-<pre><code>bower install angular-material-sidenav --save
-</code></pre>
+            <pre><code>angular.module('myApp', ['sasrio.angular-material-sidenav'])</code></pre>
 
-<h5>
-<a id="2-configuration" class="anchor" href="#2-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. configuration</h5>
-
-<p>add <code>sasrio.angular-material-sidenav</code> as a dep on your app</p>
-
-<pre><code>angular.module('myApp', ['sasrio.angular-material-sidenav']).config..etc
-</code></pre>
-
-<p>use the <code>ssSideNavSectionsProvider</code> to config your menu</p>
-
-<pre><code>ssSideNavSectionsProvider.initWithSections([{
+            <p>The module exposes <code>ssSideNavSectionsProvider</code> as a <strong>Provider</strong> to config your menu items</p>
+            <pre><code>ssSideNavSectionsProvider.initWithSections([{
     name: 'Section Heading 1',
     type: 'heading',
     children: [{
@@ -57,45 +55,46 @@
         type: 'toggle',
         pages: [{
             name: 'item 1',
-            state: 'common.index'
+            state: 'common.toggle1.item1'
         }, {
             name: 'item 2',
-            state: 'common.index'
+            state: 'common.toggle1.item2'
         }]
     }]
 }, {
     name: 'Simple link to Index state',
     state: 'common.index,
     type: 'link'
-}]);
+}]);</code></pre>
+<p>Also, provide to module the <code>$mdThemingProvider</code> in order to get same colors</p>
+<pre><code>ssSideNavSectionsProvider.initWithTheme($mdThemingProvider);</code></pre>
+            <p>You can check <a href="https://github.com/sovanna/angular-material-sidenav/blob/master/demo/app/scripts/app.js" target="_blank">the demo source code of app.js</a> to see more on how you can add items</p>
+
+            <h2>
+<a id="3-use" class="anchor" href="#3-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Usage</h2>
+            <p>In order to display your sidenav menu, use the factory <code>ssSideNav</code> to get <strong>all sections</strong> and send them into the directive <code><ss-sidenav></code>, example : </p>
+            <pre><code>// in your controller, add the factory ssSideNav
+angular.module('app.controller', [
+  'ssSideNav',
+  function (ssSideNav) {
+    $scope.menu = ssSideNav;
+  }
+]);
 </code></pre>
-
-<h5>
-<a id="3-use" class="anchor" href="#3-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. use</h5>
-
-<p>in your main controller, simply use the factory <code>ssSideNav</code> (add the dep in your controller as usual), then :</p>
-
-<pre><code>$scope.menu = ssSideNav;
+            <p>and of course, in your html view:</p>
+            <pre><code>&lt;ss-sidenav menu="menu"&gt;&lt;/ss-sidenav&gt;
 </code></pre>
-
-<p>and of course, in your html view,</p>
-
-<pre><code>&lt;ss-sidenav menu="menu"&gt;&lt;/ss-sidenav&gt;
-</code></pre>
-
-<h5>
-<a id="4-customization" class="anchor" href="#4-customization" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. customization</h5>
-
-<p>the default color used is the blue as a primaryPalette.</p>
-
-<p>I suggest you to also override the css to really do what you want.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/sovanna">sovanna</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+            <h2>
+<a id="4-customization" class="anchor" href="#4-customization" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Customization</h2>
+            <p>Colors are handle using a <strong>directive</strong> from the gist <a href="https://gist.github.com/dh94/517187e03fdde3c18103">dh94 mdStyleColor</a><br>All sidenav is builded using the <strong>primary color</strong> configured with <code>$mdThemingProvider</code>.</p>
+            <p>If you look the source code, you can easily add new template item, new kind of items and so on...</p>
+        </section>
+        <footer>
+            <p>This project is maintained by <a href="https://github.com/sovanna">sovanna</a></p>
+            <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+</body>
+
 </html>
