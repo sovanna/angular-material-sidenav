@@ -116,6 +116,13 @@
                 });
             };
 
+            var isLink = function(section, id) {
+                if(section.id == id) {
+                    if(section.visible || angular.isUndefined(section.visible)) section.visible = false;
+                    else section.visible = true;
+                }
+            };
+
             self = {
                 sections: sections,
                 selectSection: function(section) {
@@ -133,6 +140,30 @@
                 },
                 isPageSelected: function(page) {
                     return self.currentPage === page;
+                },
+                changeSectionVisible: function(id) {
+
+                    var searchLink = function(sections, val) {
+                        sections.forEach(function(section) {
+                            isLink(section, val);
+                            if (section.children) {
+                                section.children.forEach(function(child) {
+                                    if (child.pages) {
+                                        child.pages.forEach(function(page) {
+                                            isLink(page, val);
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    };
+
+                    if(angular.isArray(id)) {
+                        id.forEach(function(value) {
+                            searchLink(sections, value);
+                        });
+                    } else searchLink(sections, id);
+
                 }
             };
 
@@ -159,6 +190,11 @@
                 ssSideNav.toggleSelectSection(section);
             };
 
+            $scope.isVisible = function(visible) {
+                if(visible || angular.isUndefined(visible)) return true;
+                return false;
+            };
+
             this.isOpen = $scope.isOpen;
         }
     ])
@@ -179,6 +215,21 @@
             $scope.focusSection = function(item) {
                 ssSideNavSharedService.broadcast('SS_SIDENAV_CLICK_ITEM', item);
             };
+        }
+    ])
+
+    .controller('menuSidenavCtrl', [
+        '$scope',
+        'ssSideNav',
+        function(
+            $scope,
+            ssSidenav) {
+
+            $scope.isVisible = function(visible) {
+                if(visible || angular.isUndefined(visible)) return true;
+                return false;
+            };
+
         }
     ])
 
@@ -258,7 +309,8 @@
                 scope: {
                     menu: '='
                 },
-                templateUrl: 'views/ss/menu-sidenav.tmpl.html'
+                templateUrl: 'views/ss/menu-sidenav.tmpl.html',
+                controller: 'menuSidenavCtrl'
             };
         }
     ])
@@ -353,7 +405,7 @@
             '</md-button>\n' +
             '\n' +
             '<ul id="docs-menu-{{section.name}}" class="menu-toggle-list">\n' +
-            '   <li ng-repeat="page in section.pages">\n' +
+            '   <li ng-repeat="page in section.pages" ng-if="isVisible(page.visible)">\n' +
             '       <menu-link section="page"></menu-link>\n' +
             '   </li>\n' +
             '</ul>\n'
@@ -361,7 +413,7 @@
 
         $templateCache.put('views/ss/menu-sidenav.tmpl.html',
             '<ul class="menu">' +
-            '    <li ss-style-color="{\'border-bottom-color\': \'primary.600\'}" ng-repeat="section in menu.sections">' +
+            '    <li ss-style-color="{\'border-bottom-color\': \'primary.600\'}" ng-repeat="section in menu.sections" ng-if="isVisible(section.visible)">' +
             '        <h2 ss-style-color="{\'color\': \'primary.A100\'}" class="menu-heading md-subhead" ng-if="section.type === \'heading\'">{{section.name}}</h2>' +
             '        <menu-link section="section" ng-if="section.type === \'link\'"></menu-link>' +
             '        <menu-toggle section="section" ng-if="section.type === \'toggle\'"></menu-toggle>' +

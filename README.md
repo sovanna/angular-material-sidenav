@@ -16,23 +16,28 @@ add `sasrio.angular-material-sidenav`  to your main module's list of dependencie
 use the `ssSideNavSectionsProvider` as a **provider** to config your menu items
 
 	ssSideNavSectionsProvider.initWithSections([{
-		name: 'Section Heading 1',
-		type: 'heading',
+		id:		'toogle_1',
+		name:	'Section Heading 1',
+		type:	'heading',
 		children: [{
-			name: 'Toogle 1',
-			type: 'toggle',
-			pages: [{
-				name: 'item 1',
-				state: 'common.toggle.item1'
+			name:	'Toogle 1',
+			type:	'toggle',
+			pages:	[{
+				id:		'toggle_item_1',
+				name:	'item 1',
+				state:	'common.toggle.item1'
 			}, {
-				name: 'item 2',
-				state: 'common.toggle.item2'
+				id:		'toggle_item_2',
+				name:	'item 2',
+				state:	'common.toggle.item2'
 			}]
 		}]
 	}, {
-		name: 'Simple link to Index state',
-		state: 'common.index,
-		type: 'link'
+		id:			'link_1',
+		name:		'Simple link to Index state',
+		state:		'common.index,
+		type:		'link',
+		visible:	true // show menu ('false' for hide menu)
 	}]);
 	
 Also, provide to module the `$mdThemingProvider` in order to get same colors
@@ -47,10 +52,14 @@ In order to display your sidenav menu, use the factory `ssSideNav` to get **all 
 
 	// in your controller, add the factory ssSideNav
 	angular.module('app.controller', [
-	  'ssSideNav',
-	  function (ssSideNav) {
-	    $scope.menu = ssSideNav;
-	  }
+	  	'ssSideNav',
+	  	function (ssSideNav) {
+	    	$scope.menu = ssSideNav;
+
+			// Show or Hide menu
+			ssSideNav.changeSectionVisible('link_1');
+			ssSideNav.changeSectionVisible(['toggle_item_1', 'link_1']);
+	  	}
 	]);
 
 and of course, in your html view:
