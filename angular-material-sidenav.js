@@ -324,6 +324,7 @@
                     ssStyleColor: '='
                 },
                 link: function ($scope, $el) {
+                    
                     var _apply_color = function () {
                         for (var p in $scope.ssStyleColor) {
                             if ($scope.ssStyleColor.hasOwnProperty(p)) {
@@ -351,6 +352,9 @@
                                 colorValue = ssSideNavSections.palettes[colorA][hueA] ? ssSideNavSections.palettes[colorA][hueA].value : ssSideNavSections.palettes[colorA]['500'].value;
 
                                 $el.css(p, 'rgb(' + colorValue.join(',') + ')');
+
+                                // Add color to md-sidenav
+                                if($el.parent().attr('md-component-id')) $el.parent().css(p, 'rgb(' + colorValue.join(',') + ')');
                             }
                         }
                     };
