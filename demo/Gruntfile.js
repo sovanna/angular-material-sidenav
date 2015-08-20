@@ -37,6 +37,12 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
+      racine: {
+        files: ['../*.js'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
+      },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
@@ -86,6 +92,10 @@ module.exports = function (grunt) {
                 connect.static('./bower_components')
               ),
               connect().use(
+                '/racine',
+                connect.static('./..')
+              ),
+              connect().use(
                 '/app/styles',
                 connect.static('./app/styles')
               ),
@@ -104,6 +114,10 @@ module.exports = function (grunt) {
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
+              ),
+              connect().use(
+                '/racine',
+                connect.static('./..')
               ),
               connect.static(appConfig.app)
             ];
