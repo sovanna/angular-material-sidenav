@@ -133,6 +133,50 @@
                 },
                 isPageSelected: function(page) {
                     return self.currentPage === page;
+                },
+                setVisible: function (id, value) {
+                    if (!Array.prototype.every) {
+                        // TODO prototyp for every,
+                        // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every;
+                        return console.error('every funct not implemented');
+                    }
+
+                    self.sections.every(function (section) {
+                        if (section.id === id) {
+                            section.hidden = !value;
+                            return false;
+                        }
+
+                        if (section.children) {
+                            section.children.every(function (child) {
+                                if (child.pages) {
+                                    child.pages.every(function (page) {
+                                        if (page.id === id) {
+                                            page.hidden = !value;
+                                            return false;
+                                        }
+
+                                        return true;
+                                    });
+                                }
+
+                                return true;
+                            });
+                        }
+
+                        return true;
+                    });
+                },
+                setVisibleFor: function (ids) {
+                    if (!Array.prototype.every) {
+                        // TODO prototyp for every,
+                        // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every;
+                        return console.error('every funct not implemented');
+                    }
+
+                    ids.forEach(function (id) {
+                        self.setVisible(id.id, id.value);
+                    });
                 }
             };
 
@@ -272,6 +316,7 @@
                     ssStyleColor: '='
                 },
                 link: function ($scope, $el) {
+
                     var _apply_color = function () {
                         for (var p in $scope.ssStyleColor) {
                             if ($scope.ssStyleColor.hasOwnProperty(p)) {
@@ -299,6 +344,9 @@
                                 colorValue = ssSideNavSections.palettes[colorA][hueA] ? ssSideNavSections.palettes[colorA][hueA].value : ssSideNavSections.palettes[colorA]['500'].value;
 
                                 $el.css(p, 'rgb(' + colorValue.join(',') + ')');
+
+                                // Add color to md-sidenav
+                                if($el.parent().attr('md-component-id')) $el.parent().css(p, 'rgb(' + colorValue.join(',') + ')');
                             }
                         }
                     };
@@ -353,7 +401,7 @@
             '</md-button>\n' +
             '\n' +
             '<ul id="docs-menu-{{section.name}}" class="menu-toggle-list">\n' +
-            '   <li ng-repeat="page in section.pages">\n' +
+            '   <li ng-repeat="page in section.pages" ng-if="!page.hidden">\n' +
             '       <menu-link section="page"></menu-link>\n' +
             '   </li>\n' +
             '</ul>\n'
@@ -361,12 +409,12 @@
 
         $templateCache.put('views/ss/menu-sidenav.tmpl.html',
             '<ul class="menu">' +
-            '    <li ss-style-color="{\'border-bottom-color\': \'primary.600\'}" ng-repeat="section in menu.sections">' +
+            '    <li ss-style-color="{\'border-bottom-color\': \'primary.600\'}" ng-repeat="section in menu.sections" ng-if="!section.hidden">' +
             '        <h2 ss-style-color="{\'color\': \'primary.A100\'}" class="menu-heading md-subhead" ng-if="section.type === \'heading\'">{{section.name}}</h2>' +
             '        <menu-link section="section" ng-if="section.type === \'link\'"></menu-link>' +
             '        <menu-toggle section="section" ng-if="section.type === \'toggle\'"></menu-toggle>' +
             '        <ul ng-if="section.children">' +
-            '            <li ng-repeat="child in section.children">' +
+            '            <li ng-repeat="child in section.children" ng-if="!child.hidden">' +
             '                <menu-link section="child" ng-if="child.type === \'link\'"></menu-link>' +
             '                <menu-toggle section="child" ng-if="child.type === \'toggle\'"></menu-toggle>' +
             '            </li>' +
