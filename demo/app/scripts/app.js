@@ -69,37 +69,67 @@ angular
             $stateProvider.state({
                 name: 'common.toggle1.item1',
                 url: '/item1',
-                template: 'hello toggle1 item1'
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Toogle 1 Item 1'
+                    };
+                }
             });
 
             $stateProvider.state({
                 name: 'common.toggle1.item2',
                 url: '/item2',
-                template: 'hello toggle1 item2'
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Toogle 1 Item 2'
+                    };
+                }
             });
 
             $stateProvider.state({
                 name: 'common.toggle1.item3',
                 url: '/item3',
-                template: 'hello toggle1 item3'
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Toogle 1 Item 3'
+                    };
+                }
             });
 
             $stateProvider.state({
                 name: 'common.link1',
                 url: '/link1',
-                template: 'hello link1'
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Link 1'
+                    };
+                }
             });
 
             $stateProvider.state({
                 name: 'common.link2',
                 url: '/link2',
-                template: 'hello link2'
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Link 2'
+                    };
+                }
             });
 
             $stateProvider.state({
                 name: 'common.link3',
                 url: '/link3',
-                template: 'hello link3'
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Link 3'
+                    };
+                }
             });
 
             $stateProvider.state({
@@ -112,7 +142,12 @@ angular
             $stateProvider.state({
                 name: 'common.toggle2.item1',
                 url: '/item1',
-                template: 'hello toggle2 item1'
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Toogle 2 Item 1'
+                    };
+                }
             });
 
             ssSideNavSectionsProvider.initWithTheme($mdThemingProvider);
