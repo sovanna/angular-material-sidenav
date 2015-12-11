@@ -153,6 +153,7 @@
 		                            child.hidden = !value;
 		                            return false;
 		                        };
+
                                 if (child.pages) {
                                     child.pages.every(function (page) {
                                         if (page.id === id) {
