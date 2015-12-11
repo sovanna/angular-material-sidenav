@@ -18,10 +18,10 @@ angular.module('demoApp')
             $timeout,
             ssSideNav) {
 
-            ssSideNav.setVisible('link_3', false);
+            ssSideNav.setVisible('link_3', true);
 
             ssSideNav.setVisibleFor([{
-                id: 'toogle_1_link_3',
+                id: 'toogle_1_link_2',
                 value: true
             }, {
                 id: 'toogle_1_link_1',
@@ -29,7 +29,7 @@ angular.module('demoApp')
             }]);
 
             $timeout(function () {
-                ssSideNav.setVisible('link_3', true);
+                ssSideNav.setVisible('toogle_2', false);
             }, 1000 * 3);
 	   }
     ]);
