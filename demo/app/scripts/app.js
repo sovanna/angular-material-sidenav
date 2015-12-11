@@ -122,6 +122,17 @@ angular
             });
 
             $stateProvider.state({
+                name: 'common.link2.edit',
+                url: '/edit',
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Link 2'
+                    };
+                }
+            });
+
+            $stateProvider.state({
                 name: 'common.link3',
                 url: '/link3',
                 templateUrl: 'views/default.html',
@@ -177,7 +188,8 @@ angular
                 id: 'link_1',
                 name: 'Link 1 ',
                 state: 'common.link1',
-                type: 'link'
+                type: 'link',
+                icon: 'fa fa-check'
             }, {
                 id: 'link_2',
                 name: 'Link 2',
