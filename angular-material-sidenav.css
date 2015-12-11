@@ -1,0 +1,110 @@
+.menu {
+    margin: 0;
+}
+
+.menu,
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin: 0;
+}
+
+.menu > li {
+    border-bottom: 1px solid;
+}
+
+.menu > li:nth-child(1) {
+    border-top: none;
+}
+
+.md-whiteframe-glow-z1 {
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+}
+
+.menu .md-button {
+    box-shadow: none !important;
+    border-radius: 0;
+    /*color: white;*/
+    cursor: pointer;
+    display: block;
+    align-items: inherit;
+    line-height: 40px;
+    margin: 0;
+    max-height: 40px;
+    overflow: hidden;
+    padding: 0px 16px;
+    text-align: left;
+    text-decoration: none;
+    white-space: normal;
+    width: 100%;
+}
+
+.menu md-select {
+    /**
+     * Override md-select margins.
+     * With margins the menu will look incorrect and causes mobile list
+     * to not be scrollable.
+     */
+    margin: 0;
+    width: 100%;
+}
+
+.menu md-select md-select-label {
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.menu md-select md-select-label span {
+    margin-right: auto;
+    padding-left: 13px;
+}
+
+.menu md-select .md-select-icon {
+    margin-right: 28px;
+}
+
+.menu button.md-button::-moz-focus-inner {
+    padding: 0;
+}
+
+.menu-heading {
+    display: block;
+    line-height: 32px;
+    margin: 0;
+    padding: 8px 16px 0;
+    text-align: left;
+    width: 100%;
+}
+
+.menu-toggle-list {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.menu .menu-toggle-list a.md-button {
+    display: block;
+    padding: 0 16px 0 32px;
+    text-transform: none;
+    text-rendering: optimizeLegibility;
+    font-weight: 500;
+}
+
+.md-button-toggle .md-toggle-icon {
+    display: block;
+    margin-left: auto;
+    speak: none;
+    vertical-align: middle;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+}
+
+.md-button-toggle .md-toggle-icon.toggled {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+}
