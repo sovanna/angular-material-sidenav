@@ -149,6 +149,10 @@
 
                         if (section.children) {
                             section.children.every(function (child) {
+                                if (child.id === id) {
+		                            child.hidden = !value;
+		                            return false;
+		                        };
                                 if (child.pages) {
                                     child.pages.every(function (page) {
                                         if (page.id === id) {
