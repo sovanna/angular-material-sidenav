@@ -214,11 +214,13 @@
 
     .controller('menuLinkCtrl', [
         '$scope',
+        '$state',
         '$mdSidenav',
         'ssSideNav',
         'ssSideNavSharedService',
         function(
             $scope,
+            $state,
             $mdSidenav,
             ssSideNav,
             ssSideNavSharedService) {
@@ -231,6 +233,8 @@
                 $mdSidenav('left').close();
                 ssSideNavSharedService.broadcast('SS_SIDENAV_CLICK_ITEM', item);
             };
+
+            $scope.$state = $state;
         }
     ])
 
@@ -378,7 +382,7 @@
     .run(['$templateCache', function($templateCache) {
         $templateCache.put('views/ss/menu-link.tmpl.html',
             '<md-button\n' +
-            '   ss-style-color="{\'background-color\': isSelected(section.state) ? \'primary.800\': \'primary.default\'}"' +
+            '   ss-style-color="{\'background-color\': (isSelected(section.state) || $state.includes(section.state)) ? \'primary.800\': \'primary.default\'}"' +
             '   class="md-raised md-primary"' +
             '   ui-sref="{{section.state}}"\n' +
             '   ng-click="focusSection(section)">\n' +
