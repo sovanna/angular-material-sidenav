@@ -386,7 +386,7 @@
             '   class="md-raised md-primary"' +
             '   ui-sref="{{section.state}}"\n' +
             '   ng-click="focusSection(section)">\n' +
-            '   {{section.name}}\n' +
+            '   <span ng-if="section.icon" class="{{section.icon}}">&nbsp;&nbsp;</span>{{section.name}}\n' +
             '   <span class="md-visually-hidden"\n' +
             '       ng-if="isSelected(section.state)">\n' +
             '       current page\n' +
