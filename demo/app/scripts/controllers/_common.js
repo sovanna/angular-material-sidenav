@@ -29,7 +29,7 @@ angular.module('demoApp')
 
             // Listen event SS_SIDENAV_CLICK_ITEM to close menu
             $rootScope.$on('SS_SIDENAV_CLICK_ITEM', function() {
-                $mdSidenav('left').close();
+                console.log('do whatever you want after click on item');
             });
         }
     ]);

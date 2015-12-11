@@ -214,10 +214,12 @@
 
     .controller('menuLinkCtrl', [
         '$scope',
+        '$mdSidenav',
         'ssSideNav',
         'ssSideNavSharedService',
         function(
             $scope,
+            $mdSidenav,
             ssSideNav,
             ssSideNavSharedService) {
 
@@ -226,6 +228,7 @@
             };
 
             $scope.focusSection = function(item) {
+                $mdSidenav('left').close();
                 ssSideNavSharedService.broadcast('SS_SIDENAV_CLICK_ITEM', item);
             };
         }
