@@ -1,6 +1,6 @@
 {
   "name": "angular-material-sidenav",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "homepage": "https://github.com/sovanna/angular-material-sidenav",
   "authors": [
     "Sovanna Hing <sovanna.hing@gmail.com>"
@@ -27,7 +27,7 @@
     "angular-route": "^1.3.0",
     "angular-sanitize": "^1.3.0",
     "angular-touch": "^1.3.0",
-    "angular-material": "~0.10.0",
+    "angular-material": "^1.0.0",
     "angular-ui-router": "~0.2.15"
   },
   "private": false,
