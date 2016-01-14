@@ -27,7 +27,7 @@
             _palettes = value._PALETTES;
         };
 
-        this.$get = [function ssSideNavSectionsFactory()  {
+        this.$get = [function ssSideNavSectionsFactory() {
             var SSSideNavSections = function() {
                 this.sections = _sections;
                 this.theme = _theme;
