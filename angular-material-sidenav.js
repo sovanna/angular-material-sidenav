@@ -61,12 +61,14 @@
         '$state',
         '$stateParams',
         'ssSideNavSections',
+        'ssSideNavSharedService',
         function(
             $rootScope,
             $location,
             $state,
             $stateParams,
-            ssSideNavSections) {
+            ssSideNavSections,
+            ssSideNavSharedService) {
 
             var self,
                 sections = ssSideNavSections.sections;
@@ -118,6 +120,9 @@
 
             self = {
                 sections: sections,
+                forceSelectionWithId: function (id) {
+                    ssSideNavSharedService.broadcast('SS_SIDENAV_FORCE_SELECTED_ITEM', id);
+                },
                 selectSection: function(section) {
                     self.openedSection = section;
                 },
@@ -195,9 +200,11 @@
 
     .controller('menuToggleCtrl', [
         '$scope',
+        '$state',
         'ssSideNav',
         function(
             $scope,
+            $state,
             ssSideNav) {
 
             $scope.isOpen = function(section) {
@@ -209,6 +216,19 @@
             };
 
             this.isOpen = $scope.isOpen;
+
+            $scope.$on('SS_SIDENAV_FORCE_SELECTED_ITEM', function (event, args) {
+                if ($scope.section && $scope.section.pages) {
+                    for (var i = $scope.section.pages.length - 1; i >= 0; i--) {
+                        var _e = $scope.section.pages[i];
+
+                        if (args === _e.id) {
+                            $scope.toggle($scope.section);
+                            $state.go(_e.state);
+                        }
+                    };
+                }
+            });
         }
     ])
 
