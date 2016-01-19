@@ -37,9 +37,11 @@ use the `ssSideNavSectionsProvider` as a **provider** to config your menu items
 		name:		'Simple link to Index state',
 		state:		'common.index,
 		type:		'link',
-		visible:	true // show menu ('false' for hide menu)
+		hidden:	true // show menu ('true' for hide menu)
 	}]);
 	
+**by default, if hidden property is not set, item will be displayed. So to hide one, just pass property to true.**
+
 Also, provide to module the `$mdThemingProvider` in order to get same colors
 
 	ssSideNavSectionsProvider.initWithTheme($mdThemingProvider);
@@ -50,15 +52,28 @@ You can check the [demo source code of app.js](https://github.com/sovanna/angula
 
 In order to display your sidenav menu, use the factory `ssSideNav` to get **all sections** and send them into the directive , example :
 
+**note: update the components to the lastest as some of the implementations have changed (e.g method changeSectionVisible no more exist)**)
+
 	// in your controller, add the factory ssSideNav
 	angular.module('app.controller', [
+		'$timeout',
 	  	'ssSideNav',
-	  	function (ssSideNav) {
+	  	function ($timeout, ssSideNav) {
 	    	$scope.menu = ssSideNav;
 
 			// Show or Hide menu
-			ssSideNav.changeSectionVisible('link_1');
-			ssSideNav.changeSectionVisible(['toggle_item_1', 'link_1']);
+			ssSideNav.setVisible('link_1');
+			ssSideNav.setVisibleFor([{
+			  id: 'toggle_item_1',
+			  value: true
+			}, {
+			  id: 'link_1',
+			  value: false
+			}]);
+			
+			$timeout(function () {
+			  ssSideNav.setVisible('toogle_2', false);
+			});
 	  	}
 	]);
 
