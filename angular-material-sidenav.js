@@ -90,7 +90,7 @@
                 }
 
                 self.selectSection(section);
-                self.selectPage(section, page.state);
+                self.selectPage(section, page);
             };
 
             var onStateChangeStart = function(event, toState, toParams) {
@@ -139,7 +139,7 @@
                     self.currentPage = page;
                 },
                 isPageSelected: function(page) {
-                    return self.currentPage === page;
+                    return self.currentPage.state === page;
                 },
                 setVisible: function (id, value) {
                     if (!Array.prototype.every) {
