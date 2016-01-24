@@ -139,7 +139,7 @@
                     self.currentPage = page;
                 },
                 isPageSelected: function(page) {
-                    return self.currentPage.state === page;
+                    return self.currentPage ? self.currentPage.state === page : false;
                 },
                 setVisible: function (id, value) {
                     if (!Array.prototype.every) {
