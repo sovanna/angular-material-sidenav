@@ -90,7 +90,7 @@
                 }
 
                 self.selectSection(section);
-                self.selectPage(section, page.state);
+                self.selectPage(section, page);
             };
 
             var onStateChangeStart = function(event, toState, toParams) {
@@ -106,6 +106,8 @@
                                 child.pages.forEach(function(page) {
                                     matchPage(child, page, newState);
                                 });
+                            } else if (child.type === 'link') {
+                                matchPage(child, child, newState);
                             }
                         });
                     } else if (section.pages) {
@@ -137,7 +139,7 @@
                     self.currentPage = page;
                 },
                 isPageSelected: function(page) {
-                    return self.currentPage === page;
+                    return self.currentPage ? self.currentPage.state === page : false;
                 },
                 setVisible: function (id, value) {
                     if (!Array.prototype.every) {
