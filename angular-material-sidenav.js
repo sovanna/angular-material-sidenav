@@ -273,9 +273,11 @@
     .directive('menuToggle', [
         '$timeout',
         '$animateCss',
+        '$mdMedia',
         function(
             $timeout,
-            $animateCss) {
+            $animateCss,
+            $mdMedia) {
 
             var link = function($scope, $element, $attr, $ctrl) {
                 var _el_ul = $element.find('ul');
@@ -302,6 +304,10 @@
                     return $ctrl.isOpen($scope.section);
                 }, function(open) {
                     $timeout(function() {
+                        if (!$mdMedia('gt-sm') && open) {
+                            return;
+                        }
+
                         $animateCss(_el_ul, {
                             from: {
                                 height: open ? 0 : (getTargetHeight() + 'px')
