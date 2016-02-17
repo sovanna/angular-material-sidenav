@@ -12,24 +12,14 @@ angular.module('demoApp')
     .controller('HomeCtrl', [
         '$scope',
         '$timeout',
+        '$state',
         'ssSideNav',
         function (
             $scope,
             $timeout,
+            $state,
             ssSideNav) {
 
-            ssSideNav.setVisible('link_3', true);
 
-            ssSideNav.setVisibleFor([{
-                id: 'toogle_1_link_2',
-                value: true
-            }, {
-                id: 'toogle_1_link_1',
-                value: false
-            }]);
-
-            $timeout(function () {
-                ssSideNav.setVisible('toogle_2', false);
-            }, 1000 * 3);
 	   }
     ]);

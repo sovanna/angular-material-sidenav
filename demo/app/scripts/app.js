@@ -161,6 +161,35 @@ angular
                 }
             });
 
+            $stateProvider.state({
+                name: 'common.toggle3',
+                url: '/toogle3',
+                abstract: true,
+                template: '<ui-view/>'
+            });
+
+            $stateProvider.state({
+                name: 'common.toggle3.item1',
+                url: '/item1',
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Toogle 3 Item 1'
+                    };
+                }
+            });
+
+            $stateProvider.state({
+                name: 'common.toggle3.item2',
+                url: '/item2',
+                templateUrl: 'views/default.html',
+                controller: function ($scope) {
+                    $scope.model = {
+                        title: 'Hello Toogle 3 Item 2'
+                    };
+                }
+            });
+
             ssSideNavSectionsProvider.initWithTheme($mdThemingProvider);
             ssSideNavSectionsProvider.initWithSections([{
                 id: 'toogle_1',
