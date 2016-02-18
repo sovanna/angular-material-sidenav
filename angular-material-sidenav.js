@@ -428,7 +428,7 @@
             '   aria-controls="docs-menu-{{section.name}}"\n' +
             '   aria-expanded="{{isOpen(section)}}">\n' +
             '   <div flex layout="row">\n' +
-            '       {{section.name}}\n' +
+            '       <span ng-if="section.icon" class="{{section.icon}}">&nbsp;&nbsp;</span>{{section.name}}\n' +
             '       <span flex></span>\n' +
             '       <span aria-hidden="true" class="md-toggle-icon"\n' +
             '           ng-class="{\'toggled\' : isOpen(section)}">\n' +
@@ -450,7 +450,9 @@
         $templateCache.put('views/ss/menu-sidenav.tmpl.html',
             '<ul class="menu">' +
             '    <li ss-style-color="{\'border-bottom-color\': \'primary.600\'}" ng-repeat="section in menu.sections" ng-if="!section.hidden">' +
-            '        <h2 ss-style-color="{\'color\': \'primary.A100\'}" class="menu-heading md-subhead" ng-if="section.type === \'heading\'">{{section.name}}</h2>' +
+            '        <h2 ss-style-color="{\'color\': \'primary.A100\'}" class="menu-heading md-subhead" ng-if="section.type === \'heading\'">' +
+            '            <span ng-if="section.icon" class="{{section.icon}}">&nbsp;&nbsp;</span>{{section.name}}\n' +
+            '        </h2>' +
             '        <menu-link section="section" ng-if="section.type === \'link\'"></menu-link>' +
             '        <menu-toggle section="section" ng-if="section.type === \'toggle\'"></menu-toggle>' +
             '        <ul ng-if="section.children">' +
