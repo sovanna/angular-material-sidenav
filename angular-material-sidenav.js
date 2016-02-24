@@ -275,11 +275,11 @@
     .directive('menuToggle', [
         '$timeout',
         '$animateCss',
-        '$mdMedia',
+        '$mdSidenav',
         function(
             $timeout,
             $animateCss,
-            $mdMedia) {
+            $mdSidenav) {
 
             var link = function($scope, $element, $attr, $ctrl) {
                 var _el_ul = $element.find('ul');
@@ -306,7 +306,7 @@
                     return $ctrl.isOpen($scope.section);
                 }, function(open) {
                     $timeout(function() {
-                        if (!$mdMedia('gt-sm') && open) {
+                        if (!$mdSidenav('left').isOpen() && open) {
                             return;
                         }
 
