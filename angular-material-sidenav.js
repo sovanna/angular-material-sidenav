@@ -276,10 +276,12 @@
         '$timeout',
         '$animateCss',
         '$mdSidenav',
+        '$mdMedia',
         function(
             $timeout,
             $animateCss,
-            $mdSidenav) {
+            $mdSidenav,
+            $mdMedia) {
 
             var link = function($scope, $element, $attr, $ctrl) {
                 var _el_ul = $element.find('ul');
@@ -306,7 +308,7 @@
                     return $ctrl.isOpen($scope.section);
                 }, function(open) {
                     $timeout(function() {
-                        if (!$mdSidenav('left').isOpen() && open) {
+                        if (!$mdMedia('gt-sm') && !$mdSidenav('left').isOpen() && open) {
                             return;
                         }
 
