@@ -35,7 +35,7 @@ use the `ssSideNavSectionsProvider` as a **provider** to config your menu items
 	}, {
 		id:			'link_1',
 		name:		'Simple link to Index state',
-		state:		'common.index,
+		state:		'common.index',
 		type:		'link',
 		hidden:	true // show menu ('true' for hide menu)
 	}]);
