@@ -6,8 +6,10 @@
     "Sovanna Hing <sovanna.hing@gmail.com>"
   ],
   "description": "Component that build the same sidenav from official angular material website",
-  "main": "./angular-material-sidenav.js",
-  "style": "./angular-material-sidenav.css",
+  "main": [
+    "./angular-material-sidenav.js",
+    "./angular-material-sidenav.css"
+  ],
   "keywords": [
     "angular",
     "material",
